@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gcc -o md5pipe main.c md5.c
+gcc -O3 -o md5pipe main.c md5.c

@@ -16,7 +16,6 @@ void md5_update(struct md5_ctx *ctx, const void *data, unsigned int len)
     unsigned int n;
     const uint8_t *ptr = data;
     uint8_t *buf = (uint8_t *)ctx->buf;
-        //fprintf(stderr, "md5 update %d bytes\n", len);
 
     while (len > 0) {
         n = MD5_BLOCK_LENGTH - bufpos(ctx);
@@ -27,13 +26,9 @@ void md5_update(struct md5_ctx *ctx, const void *data, unsigned int len)
         len -= n;
         ctx->nbytes += n;
         if (bufpos(ctx) == 0) {
-            //swap_words(ctx->buf, 16);
-                        //fprintf(stderr, "md5 pointer is at %d \n", ptr);
-                //fprintf(stderr, "MD5 update data : %s\n", ctx->buf);
             md5_mix(ctx, ctx->buf);
         }
     }
-        //fprintf(stderr, "md5 udpate end\n");
 }
 
 
@@ -52,11 +47,9 @@ void md5_final(uint8_t *dst, struct md5_ctx *ctx)
     /* add padding */
     pad_len = MD5_BLOCK_LENGTH - 8 - pos;
     if (pad_len <= 0) pad_len += MD5_BLOCK_LENGTH;
-        //fprintf(stderr,"\npad_len = %d\n", pad_len);
     md5_update(ctx, padding, pad_len);
 
     /* add length directly */
-    //swap_words(ctx->buf, 14);
     ctx->buf[14] = final_len;
     ctx->buf[15] = final_len >> 32;
 
@@ -72,7 +65,6 @@ void md5_final(uint8_t *dst, struct md5_ctx *ctx)
 /* md5 hashing */
 static void md5_mix(struct md5_ctx *ctx, const uint32_t *X)
 {
-	//fprintf(stderr,"%s", X);
     uint32_t a, b, c, d;
 
     a = ctx->a;
